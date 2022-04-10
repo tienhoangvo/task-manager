@@ -1,6 +1,12 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
-const AddTask = ({ onAddTask }) => {
+import classes from './../styles/TaskForm.module.css'
+
+const TaskForm = ({
+  action = 'Add',
+  initialTask,
+  onSubmit,
+}) => {
   const [text, setText] = useState('')
   const [priority, setPriority] = useState('')
 
@@ -8,7 +14,7 @@ const AddTask = ({ onAddTask }) => {
   const isPriorityEmpty = priority === ''
   const disabledAddButton =
     isTextEmpty || isPriorityEmpty
-
+  const className = classes[action.toLowerCase()]
   const handleTextChange = (event) => {
     setText(event.target.value)
   }
@@ -21,13 +27,23 @@ const AddTask = ({ onAddTask }) => {
     event.preventDefault()
     setText('')
     setPriority('')
-    onAddTask({ text, priority })
+    onSubmit({ text, priority })
   }
 
+  useEffect(() => {
+    if (initialTask) {
+      setText(initialTask.text)
+      setPriority(initialTask.priority)
+    }
+  }, [initialTask])
+
   return (
-    <form onSubmit={handleSubmit}>
+    <form
+      onSubmit={handleSubmit}
+      className={className}
+    >
       <input
-        placeholder="Add task"
+        placeholder={`${action} task`}
         value={text}
         onChange={handleTextChange}
       />{' '}
@@ -41,9 +57,11 @@ const AddTask = ({ onAddTask }) => {
         <option value="medium">Medium</option>
         <option value="low">Low</option>
       </select>{' '}
-      <button disabled={disabledAddButton}>Add</button>
+      <button disabled={disabledAddButton}>
+        {action}
+      </button>
     </form>
   )
 }
 
-export default AddTask
+export default TaskForm

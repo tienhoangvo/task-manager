@@ -1,3 +1,6 @@
+.taskListItem form {
+  display: inline;
+}
 .priority-high {
   color: darkred;
 }

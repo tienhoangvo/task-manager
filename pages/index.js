@@ -1,11 +1,11 @@
 import { useState } from 'react'
 
-import AddTask from '../src/components/AddTask'
 import TaskList from '../src/components/TaskList'
 import Layout from '../src/components/Layout'
 
 import classes from './../src/styles/Home.module.css'
 import initialTasks from '../src/data/initialTasks'
+import TaskForm from '../src/components/TaskForm'
 
 const Home = () => {
   const [tasks, setTasks] = useState(initialTasks)
@@ -41,7 +41,10 @@ const Home = () => {
 
   return (
     <div className={classes.container}>
-      <AddTask onAddTask={handleAddTask} />
+      <TaskForm
+        action="Add"
+        onSubmit={handleAddTask}
+      />
       <TaskList
         tasks={tasks}
         onDeleteTask={handleDeleteTask}

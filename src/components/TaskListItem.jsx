@@ -1,6 +1,7 @@
 import { useState } from 'react'
 
 import classes from './../styles/TaskListItem.module.css'
+import TaskForm from './TaskForm'
 
 const TaskListItem = ({
   task,
@@ -23,43 +24,30 @@ const TaskListItem = ({
     setIsEditing(true)
   }
 
-  const handleSaveClick = () => {
-    setIsEditing(false)
-  }
-
-  const handleEditInputChange = (event) => {
-    onChangeTask({
-      ...task,
-      text: event.target.value,
-    })
-  }
-
-  const handlePriorityChange = (event) => {
-    onChangeTask({
-      ...task,
-      priority: event.target.value,
-    })
-  }
-
   const handleDeleteClick = () => {
     onDeleteTask(task.id)
   }
 
+  const handleEditFormSubmit = ({
+    text,
+    priority,
+  }) => {
+    onChangeTask({
+      ...task,
+      priority,
+      text,
+    })
+
+    setIsEditing(false)
+  }
+
   const taskContent = isEditing ? (
     <>
-      <input
-        value={task.text}
-        onChange={handleEditInputChange}
-      />{' '}
-      <select
-        value={task.priority}
-        onChange={handlePriorityChange}
-      >
-        <option value="high">High</option>
-        <option value="medium">Medium</option>
-        <option value="low">Low</option>
-      </select>{' '}
-      <button onClick={handleSaveClick}>Save</button>
+      <TaskForm
+        initialTask={task}
+        action="Edit"
+        onSubmit={handleEditFormSubmit}
+      />
     </>
   ) : (
     <>
