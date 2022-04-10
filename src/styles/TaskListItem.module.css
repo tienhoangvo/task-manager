@@ -1,0 +1,11 @@
+.priority-high {
+  color: darkred;
+}
+
+.priority-medium {
+  color: darkblue;
+}
+
+.priority-low {
+  color: darkgoldenrod;
+}
