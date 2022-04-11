@@ -1,17 +1,11 @@
+import { useTasksContext } from '../contexts/TasksContext'
 import TaskListItem from './TaskListItem'
 
-const TaskList = ({
-  tasks = [],
-  onDeleteTask,
-  onChangeTask,
-}) => {
+const TaskList = () => {
+  const tasks = useTasksContext()
+
   const listItems = tasks.map((task) => (
-    <TaskListItem
-      key={task.id}
-      task={task}
-      onDeleteTask={onDeleteTask}
-      onChangeTask={onChangeTask}
-    />
+    <TaskListItem key={task.id} task={task} />
   ))
   return <ul>{listItems}</ul>
 }

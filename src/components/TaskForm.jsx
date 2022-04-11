@@ -12,9 +12,17 @@ const TaskForm = ({ initialTask, onSubmit }) => {
     isTextEmpty || isPriorityEmpty
 
   const action = initialTask
-    ? { name: 'edit', submitName: 'Save' }
-    : { name: 'add', submitName: 'Add' }
-  const className = classes[action.name]
+    ? {
+        className: 'edit',
+        submitName: 'Save',
+        type: 'changed',
+      }
+    : {
+        className: 'add',
+        submitName: 'Add',
+        type: 'added',
+      }
+  const className = classes[action.className]
   const handleTextChange = (event) => {
     setText(event.target.value)
   }
@@ -27,7 +35,11 @@ const TaskForm = ({ initialTask, onSubmit }) => {
     event.preventDefault()
     setText('')
     setPriority('')
-    onSubmit({ text, priority })
+
+    onSubmit({
+      priority,
+      text,
+    })
   }
 
   useEffect(() => {

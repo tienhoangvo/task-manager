@@ -1,20 +1,20 @@
 import { useState } from 'react'
 
+import { useTasksDispatchContext } from '../contexts/TasksContext'
 import classes from './../styles/TaskListItem.module.css'
 import TaskForm from './TaskForm'
 
-const TaskListItem = ({
-  task,
-  onChangeTask,
-  onDeleteTask,
-}) => {
+const TaskListItem = ({ task }) => {
   const [isEditing, setIsEditing] = useState(false)
+
+  const { handleChangeTask, handleDeleteTask } =
+    useTasksDispatchContext()
 
   const className =
     classes[`priority-${task.priority}`]
 
   const handleCheckboxChange = (event) => {
-    onChangeTask({
+    handleChangeTask({
       ...task,
       done: event.target.checked,
     })
@@ -25,14 +25,14 @@ const TaskListItem = ({
   }
 
   const handleDeleteClick = () => {
-    onDeleteTask(task.id)
+    handleDeleteTask(task.id)
   }
 
   const handleEditFormSubmit = ({
     text,
     priority,
   }) => {
-    onChangeTask({
+    handleChangeTask({
       ...task,
       priority,
       text,
