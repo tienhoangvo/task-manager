@@ -118,7 +118,7 @@ class MyDocument extends Document {
           <meta
             name="twitter:description"
             content={
-              process.env.NEXT_PUBLIC_DESCRIPTION
+              process.env.NEXT_PUBLIC_APP_DESCRIPTION
             }
           />
           <meta
@@ -137,7 +137,7 @@ class MyDocument extends Document {
           <meta
             property="og:description"
             content={
-              process.env.NEXT_PUBLIC_DESCRIPTION
+              process.env.NEXT_PUBLIC_APP_DESCRIPTION
             }
           />
           <meta
