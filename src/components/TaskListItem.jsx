@@ -45,7 +45,6 @@ const TaskListItem = ({
     <>
       <TaskForm
         initialTask={task}
-        action="Edit"
         onSubmit={handleEditFormSubmit}
       />
     </>

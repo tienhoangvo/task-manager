@@ -41,10 +41,7 @@ const Home = () => {
 
   return (
     <div className={classes.container}>
-      <TaskForm
-        action="Add"
-        onSubmit={handleAddTask}
-      />
+      <TaskForm onSubmit={handleAddTask} />
       <TaskList
         tasks={tasks}
         onDeleteTask={handleDeleteTask}

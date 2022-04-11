@@ -2,11 +2,7 @@ import { useState, useEffect } from 'react'
 
 import classes from './../styles/TaskForm.module.css'
 
-const TaskForm = ({
-  action = 'Add',
-  initialTask,
-  onSubmit,
-}) => {
+const TaskForm = ({ initialTask, onSubmit }) => {
   const [text, setText] = useState('')
   const [priority, setPriority] = useState('')
 
@@ -14,7 +10,11 @@ const TaskForm = ({
   const isPriorityEmpty = priority === ''
   const disabledAddButton =
     isTextEmpty || isPriorityEmpty
-  const className = classes[action.toLowerCase()]
+
+  const action = initialTask
+    ? { name: 'edit', submitName: 'Save' }
+    : { name: 'add', submitName: 'Add' }
+  const className = classes[action.name]
   const handleTextChange = (event) => {
     setText(event.target.value)
   }
@@ -43,7 +43,7 @@ const TaskForm = ({
       className={className}
     >
       <input
-        placeholder={`${action} task`}
+        placeholder={`${action.submitName} task`}
         value={text}
         onChange={handleTextChange}
       />{' '}
@@ -58,7 +58,7 @@ const TaskForm = ({
         <option value="low">Low</option>
       </select>{' '}
       <button disabled={disabledAddButton}>
-        {action}
+        {action.submitName}
       </button>
     </form>
   )
