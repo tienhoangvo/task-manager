@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useReducer } from 'react'
 
 import TaskList from '../src/components/TaskList'
 import Layout from '../src/components/Layout'
@@ -6,20 +6,13 @@ import Layout from '../src/components/Layout'
 import classes from './../src/styles/Home.module.css'
 import initialTasks from '../src/data/initialTasks'
 import TaskForm from '../src/components/TaskForm'
+import tasksReducer from '../src/reducers/tasksReducer'
 
 const Home = () => {
-  const [tasks, setTasks] = useState(initialTasks)
-
-  const handleAddTask = ({ text, priority }) => {
-    const newTask = {
-      id: new Date().getTime(),
-      text,
-      priority,
-      done: false,
-    }
-
-    setTasks([...tasks, newTask])
-  }
+  const [tasks, dispatch] = useReducer(
+    tasksReducer,
+    initialTasks
+  )
 
   const doneAmount = tasks.filter(
     (task) => task.done
@@ -27,16 +20,27 @@ const Home = () => {
 
   const total = tasks.length
 
+  const handleAddTask = ({ text, priority }) => {
+    dispatch({
+      type: 'added',
+      id: new Date().getTime(),
+      text,
+      priority,
+    })
+  }
+
   const handleDeleteTask = (taskId) => {
-    setTasks(
-      tasks.filter((task) => task.id !== taskId)
-    )
+    dispatch({
+      type: 'deleted',
+      id: taskId,
+    })
   }
 
   const handleChangeTask = (task) => {
-    setTasks(
-      tasks.map((t) => (t.id === task.id ? task : t))
-    )
+    dispatch({
+      type: 'changed',
+      task,
+    })
   }
 
   return (
