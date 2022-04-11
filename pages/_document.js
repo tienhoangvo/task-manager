@@ -127,7 +127,9 @@ class MyDocument extends Document {
           />
           <meta
             name="twitter:creator"
-            content="@DavidWShadow"
+            content={
+              process.env.NEXT_PUBLIC_APP_CREATOR
+            }
           />
           <meta property="og:type" content="website" />
           <meta
