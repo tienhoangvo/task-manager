@@ -123,7 +123,7 @@ class MyDocument extends Document {
           />
           <meta
             name="twitter:image"
-            content={`https://${process.env.NEXT_PUBLIC_DOMAIN}/android-chrome-192x192.png`}
+            content={`https://${process.env.NEXT_PUBLIC_DOMAIN}/android-icon-192x192.png`}
           />
           <meta
             name="twitter:creator"
@@ -150,7 +150,7 @@ class MyDocument extends Document {
           />
           <meta
             property="og:image"
-            content={`https://${process.env.NEXT_PUBLIC_DOMAIN}/apple-touch-icon.png`}
+            content={`https://${process.env.NEXT_PUBLIC_DOMAIN}/android-icon-192x192.png`}
           />
         </Head>
         <body>
